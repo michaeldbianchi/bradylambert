@@ -1,5 +1,8 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import "../semantic-ui/semantic.less"
+
+import { Button } from "semantic-ui-react"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -14,6 +17,10 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
+        <h1>TESTING</h1>
+        <Button size="small" color="green">
+          SemanticUI
+        </Button>
         <SEO title="All posts" />
         <Bio />
         {posts.map(({ node }) => {
@@ -22,7 +29,7 @@ class BlogIndex extends React.Component {
             <div key={node.fields.slug}>
               <h3
                 style={{
-                  marginBottom: rhythm(1 / 4),
+                  marginBottom: rhythm(1 / 4)
                 }}
               >
                 <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
@@ -32,7 +39,7 @@ class BlogIndex extends React.Component {
               <small>{node.frontmatter.date}</small>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
+                  __html: node.frontmatter.description || node.excerpt
                 }}
               />
             </div>

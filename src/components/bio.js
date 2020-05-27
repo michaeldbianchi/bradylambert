@@ -21,7 +21,7 @@ function Bio() {
           <div
             style={{
               display: `flex`,
-              marginBottom: rhythm(2.5),
+              marginBottom: rhythm(2.5)
             }}
           >
             <Image
@@ -31,15 +31,14 @@ function Bio() {
                 marginRight: rhythm(1 / 2),
                 marginBottom: 0,
                 minWidth: 50,
-                borderRadius: `100%`,
+                borderRadius: `100%`
               }}
               imgStyle={{
-                borderRadius: `50%`,
+                borderRadius: `50%`
               }}
             />
             <p>
-              Site by <strong>{author}</strong>.
-              {` `}
+              Site by <strong>{author}</strong>.{` `}
               <a href={`https://github.com/${social.github}`}>
                 You should find him on GitHub
               </a>

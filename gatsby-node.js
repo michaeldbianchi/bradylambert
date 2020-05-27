@@ -43,8 +43,8 @@ exports.createPages = ({ graphql, actions }) => {
         context: {
           slug: post.node.fields.slug,
           previous,
-          next,
-        },
+          next
+        }
       })
     })
 
@@ -60,7 +60,20 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value
     })
   }
+}
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "../../theme.config$": path.join(
+          __dirname,
+          "src/semantic-ui/theme.config"
+        )
+      }
+    }
+  })
 }
