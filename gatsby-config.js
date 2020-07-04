@@ -3,11 +3,25 @@ module.exports = {
     title: `Brady Lambert`,
     author: `Brady Lambert`,
     description: `Brady Lambert's personal website.`,
-    siteUrl: `https://bradylambert.com/`,
+    siteUrl: `https://bradylambert.com`,
     social: {
       github: `lambertbrady`,
       email: `lambertbrady14@gmail.com`
-    }
+    },
+    navLinks: [
+      {
+        name: "Home",
+        path: "/"
+      },
+      {
+        name: "About",
+        path: "/about"
+      },
+      {
+        name: "Contact",
+        path: "/contact"
+      }
+    ]
   },
   plugins: [
     {
@@ -22,6 +36,13 @@ module.exports = {
       options: {
         path: `${__dirname}/content/assets`,
         name: `assets`
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages`,
+        name: `pages`
       }
     },
     {

@@ -16,19 +16,10 @@ function Bio() {
       render={data => {
         const { author, social } = data.site.siteMetadata
         return (
-          <div
-            style={{
-              display: `flex`
-            }}
-          >
+          <>
             <Image
               fixed={data.avatar.childImageSharp.fixed}
               alt={author}
-              style={{
-                marginBottom: 0,
-                minWidth: 50,
-                borderRadius: `100%`
-              }}
               imgStyle={{
                 borderRadius: `50%`
               }}
@@ -39,7 +30,7 @@ function Bio() {
                 You should find him on GitHub
               </a>
             </p>
-          </div>
+          </>
         )
       }}
     />
