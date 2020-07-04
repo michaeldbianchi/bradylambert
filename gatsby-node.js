@@ -9,6 +9,7 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
+          filter: { fields: { sourceInstanceName: { eq: "blog" } } }
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
@@ -34,16 +35,16 @@ exports.createPages = ({ graphql, actions }) => {
     const posts = result.data.allMarkdownRemark.edges
 
     posts.forEach((post, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1].node
-      const next = index === 0 ? null : posts[index - 1].node
+      const postPrev = index === posts.length - 1 ? null : posts[index + 1].node
+      const postNext = index === 0 ? null : posts[index - 1].node
 
       createPage({
         path: post.node.fields.slug,
         component: blogPost,
         context: {
           slug: post.node.fields.slug,
-          previous,
-          next
+          postPrev,
+          postNext
         }
       })
     })
@@ -54,13 +55,26 @@ exports.createPages = ({ graphql, actions }) => {
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
-
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
+  const sourceInstanceName = "blog"
+  if (
+    node.internal.type === "MarkdownRemark" &&
+    node.parent !== null &&
+    getNode(node.parent).sourceInstanceName === sourceInstanceName
+  ) {
+    const relativePath = createFilePath({
       node,
-      value
+      getNode,
+      trailingSlash: false
+    })
+    createNodeField({
+      node,
+      name: "slug",
+      value: `/${sourceInstanceName}${relativePath}`
+    })
+    createNodeField({
+      node,
+      name: "sourceInstanceName",
+      value: sourceInstanceName
     })
   }
 }
