@@ -4,9 +4,9 @@ import "../semantic-ui/semantic.less"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
-import { Card, Container } from "semantic-ui-react"
+import { Card } from "semantic-ui-react"
 
-const HomePage = ({ data, location }) => {
+const HomePage = ({ data }) => {
   const posts = data.allMarkdownRemark.edges
 
   return (
@@ -14,7 +14,7 @@ const HomePage = ({ data, location }) => {
       <Bio />
       <Card.Group centered>
         {posts.map(({ node: post }) => (
-          <Card as={Link} to={post.fields.slug}>
+          <Card key={post.id} as={Link} to={post.fields.slug}>
             <Card.Content
               header={post.frontmatter.title || post.fields.slug}
               meta={post.frontmatter.date}
@@ -37,6 +37,7 @@ export const query = graphql`
     ) {
       edges {
         node {
+          id
           excerpt
           fields {
             slug
