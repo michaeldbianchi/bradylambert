@@ -1,10 +1,10 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import { useLocation } from "@reach/router"
-import { Header, Container, Menu } from "semantic-ui-react"
+import { Container, Menu } from "semantic-ui-react"
 import SEO from "../components/seo"
 
-const Layout = ({ pageSEO, children }) => {
+const Layout = ({ pageSEO = {}, children }) => {
   const data = useStaticQuery(query)
   const navLinks = data.site.siteMetadata.navLinks
   const { pathname } = useLocation()
@@ -15,7 +15,12 @@ const Layout = ({ pageSEO, children }) => {
       <header>
         <Menu as="nav" compact stackable pointing secondary>
           {navLinks.map(({ name, path }) => (
-            <Menu.Item as={Link} to={path} active={path === pathname}>
+            <Menu.Item
+              key={name}
+              as={Link}
+              to={path}
+              active={path === pathname}
+            >
               {name}
             </Menu.Item>
           ))}

@@ -5,7 +5,6 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 
 const BlogPostTemplate = props => {
-  const location = props.location
   const post = props.data.markdownRemark
   const { postPrev, postNext } = props.pageContext
 

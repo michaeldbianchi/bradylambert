@@ -1,9 +1,7 @@
 import React from "react"
-import { graphql } from "gatsby"
-
 import Layout from "../components/layout"
 
-const NotFoundPage = ({ location }) => {
+const NotFoundPage = () => {
   return (
     <Layout pageSEO={{ title: "404: Not Found" }}>
       <h1>Not Found</h1>
