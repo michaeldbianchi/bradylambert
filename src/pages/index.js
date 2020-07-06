@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import { Card } from "semantic-ui-react"
 
 const HomePage = ({ data }) => {
-  const posts = data.allMarkdownRemark.edges
+  const posts = data.allMdx.edges
 
   return (
     <Layout pageSEO={{ title: "Home" }}>
@@ -29,9 +29,9 @@ const HomePage = ({ data }) => {
 
 export default HomePage
 
-export const query = graphql`
+export const pageQuery = graphql`
   query {
-    allMarkdownRemark(
+    allMdx(
       filter: { fields: { sourceInstanceName: { eq: "blog" } } }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {

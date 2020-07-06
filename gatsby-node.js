@@ -8,7 +8,7 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(
     `
       {
-        allMarkdownRemark(
+        allMdx(
           filter: { fields: { sourceInstanceName: { eq: "blog" } } }
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
@@ -32,8 +32,7 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // Create blog posts pages.
-    const posts = result.data.allMarkdownRemark.edges
-
+    const posts = result.data.allMdx.edges
     posts.forEach((post, index) => {
       const postPrev = index === posts.length - 1 ? null : posts[index + 1].node
       const postNext = index === 0 ? null : posts[index - 1].node
@@ -57,7 +56,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   const sourceInstanceName = "blog"
   if (
-    node.internal.type === "MarkdownRemark" &&
+    node.internal.type === "Mdx" &&
     node.parent !== null &&
     getNode(node.parent).sourceInstanceName === sourceInstanceName
   ) {
