@@ -1,19 +1,13 @@
 import React from "react"
-import { useStaticQuery, Link } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
+import Img from "gatsby-image"
 import { useLocation } from "@reach/router"
-import {
-  Container,
-  Divider,
-  Grid,
-  List,
-  Menu,
-  Segment
-} from "semantic-ui-react"
+import { Container, Grid, List, Menu, Segment } from "semantic-ui-react"
 import SEO from "../components/seo"
 
 const Layout = ({ pageSEO = {}, children }) => {
   const data = useStaticQuery(query)
-  const navLinks = data.site.siteMetadata.navLinks
+  const { author, social, navLinks } = data.site.siteMetadata
   const { pathname } = useLocation()
   const items = navLinks.map(({ name, path }) => ({
     as: Link,
@@ -37,6 +31,15 @@ const Layout = ({ pageSEO = {}, children }) => {
           pointing
           secondary
         />
+        <Segment basic floated="right" vertical>
+          <Img
+            fixed={data.avatar.childImageSharp.fixed}
+            alt={author}
+            imgStyle={{
+              borderRadius: `50%`
+            }}
+          />
+        </Segment>
       </header>
       <main>
         <Segment basic padded="very">
@@ -47,16 +50,15 @@ const Layout = ({ pageSEO = {}, children }) => {
         <Segment size="small">
           <Grid container textAlign="center" padded="vertically">
             <Grid.Row>
-              <List items={items} horizontal divided relaxed link />
-            </Grid.Row>
-            <Grid.Row>
-              <span>
-                © {new Date().getFullYear()}, Built with
-                {` `}
-                <a href="https://www.gatsbyjs.org">Gatsby</a>
-              </span>
+              <List items={items} centered horizontal divided relaxed link />
             </Grid.Row>
           </Grid>
+          <Container textAlign="center">
+            {`© ${new Date().getFullYear()} ${author}. Find him on`}
+            {` `}
+            <a href={social.github}>Github</a>
+            {`!`}
+          </Container>
         </Segment>
       </footer>
     </>
@@ -67,11 +69,22 @@ export default Layout
 
 const query = graphql`
   query {
+    avatar: file(relativePath: { eq: "profile-pic.jpg" }) {
+      childImageSharp {
+        fixed(width: 50, height: 50) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
     site {
       siteMetadata {
+        author
         navLinks {
           name
           path
+        }
+        social {
+          github
         }
       }
     }

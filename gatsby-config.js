@@ -5,7 +5,7 @@ module.exports = {
     description: `Brady Lambert's personal website.`,
     siteUrl: `https://bradylambert.com`,
     social: {
-      github: `lambertbrady`,
+      github: `https://github.com/lambertbrady`,
       email: `lambertbrady14@gmail.com`
     },
     navLinks: [

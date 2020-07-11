@@ -2,7 +2,6 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import "../semantic-ui/semantic.less"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import { Card } from "semantic-ui-react"
 
@@ -11,8 +10,7 @@ const HomePage = ({ data }) => {
 
   return (
     <Layout pageSEO={{ title: "Home" }}>
-      <Bio />
-      <Card.Group centered>
+      <Card.Group centered itemsPerRow="3" stackable>
         {posts.map(({ node: post }) => (
           <Card key={post.id} as={Link} to={post.fields.slug}>
             <Card.Content

@@ -2,14 +2,19 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
+import {
+  Button,
+  Divider,
+  Header,
+  Icon,
+  Segment,
+  Container
+} from "semantic-ui-react"
 
 const BlogPostTemplate = props => {
   const post = props.data.mdx
   const { postPrev, postNext } = props.pageContext
-  console.log(post)
-  console.log(props.pageContext)
 
   return (
     <Layout
@@ -18,28 +23,45 @@ const BlogPostTemplate = props => {
         description: post.frontmatter.description || post.excerpt
       }}
     >
-      <h1>{post.frontmatter.title}</h1>
-      <p>{post.frontmatter.date}</p>
-      <MDXRenderer>{post.body}</MDXRenderer>
-      <hr />
-      <Bio />
-
-      <ul>
-        <li>
+      <Container text>
+        <Header as="h1">
+          {post.frontmatter.title}
+          <Header.Subheader as="h2" color="teal">
+            {post.frontmatter.date}
+          </Header.Subheader>
+        </Header>
+        <Divider hidden />
+        <MDXRenderer>{post.body}</MDXRenderer>
+        <Divider section />
+        <Segment basic clearing style={{ paddingBottom: 0, paddingTop: 0 }}>
           {postPrev && (
-            <Link to={postPrev.fields.slug} rel="prev">
-              ← {postPrev.frontmatter.title}
-            </Link>
+            <Button
+              as={Link}
+              to={postPrev.fields.slug}
+              basic
+              color="teal"
+              floated="left"
+              size="tiny"
+            >
+              <Icon name="arrow left" />
+              {postPrev.frontmatter.title}
+            </Button>
           )}
-        </li>
-        <li>
           {postNext && (
-            <Link to={postNext.fields.slug} rel="next">
-              {postNext.frontmatter.title} →
-            </Link>
+            <Button
+              as={Link}
+              to={postNext.fields.slug}
+              basic
+              color="teal"
+              floated="right"
+              size="tiny"
+            >
+              {postNext.frontmatter.title}
+              <Icon name="arrow right" />
+            </Button>
           )}
-        </li>
-      </ul>
+        </Segment>
+      </Container>
     </Layout>
   )
 }
@@ -52,6 +74,13 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       body
+      exports {
+        metadata {
+          title
+          date(formatString: "MMMM DD, YYYY")
+          description
+        }
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
