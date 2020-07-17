@@ -5,16 +5,22 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/layout"
 import {
   Button,
+  Container,
   Divider,
   Header,
   Icon,
-  Segment,
-  Container
+  Segment
 } from "semantic-ui-react"
 
 const BlogPostTemplate = props => {
   const post = props.data.mdx
   const { postPrev, postNext } = props.pageContext
+  const postButtonProps = {
+    as: Link,
+    basic: true,
+    color: "teal",
+    size: "tiny"
+  }
 
   return (
     <Layout
@@ -26,22 +32,19 @@ const BlogPostTemplate = props => {
       <Container text>
         <Header as="h1">
           {post.frontmatter.title}
-          <Header.Subheader as="h2" color="teal">
+          <Header.Subheader color="teal">
             {post.frontmatter.date}
           </Header.Subheader>
         </Header>
         <Divider hidden />
         <MDXRenderer>{post.body}</MDXRenderer>
         <Divider section />
-        <Segment basic clearing style={{ paddingBottom: 0, paddingTop: 0 }}>
+        <Segment basic clearing style={{ padding: 0 }}>
           {postPrev && (
             <Button
-              as={Link}
-              to={postPrev.fields.slug}
-              basic
-              color="teal"
+              {...postButtonProps}
               floated="left"
-              size="tiny"
+              to={postPrev.fields.slug}
             >
               <Icon name="arrow left" />
               {postPrev.frontmatter.title}
@@ -49,12 +52,9 @@ const BlogPostTemplate = props => {
           )}
           {postNext && (
             <Button
-              as={Link}
-              to={postNext.fields.slug}
-              basic
-              color="teal"
+              {...postButtonProps}
               floated="right"
-              size="tiny"
+              to={postNext.fields.slug}
             >
               {postNext.frontmatter.title}
               <Icon name="arrow right" />
@@ -74,17 +74,10 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       body
-      exports {
-        metadata {
-          title
-          date(formatString: "MMMM DD, YYYY")
-          description
-        }
-      }
       frontmatter {
-        title
         date(formatString: "MMMM DD, YYYY")
         description
+        title
       }
     }
   }

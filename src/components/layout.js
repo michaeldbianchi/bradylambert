@@ -27,7 +27,6 @@ const Layout = ({ pageSEO = {}, children }) => {
           color="teal"
           size="huge"
           compact
-          stackable
           pointing
           secondary
         />
@@ -50,7 +49,7 @@ const Layout = ({ pageSEO = {}, children }) => {
         <Segment size="small">
           <Grid container textAlign="center" padded="vertically">
             <Grid.Row>
-              <List items={items} centered horizontal divided relaxed link />
+              <List items={items} horizontal divided relaxed link />
             </Grid.Row>
           </Grid>
           <Container textAlign="center">

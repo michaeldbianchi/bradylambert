@@ -3,16 +3,21 @@ import { Link, graphql } from "gatsby"
 import "../semantic-ui/semantic.less"
 
 import Layout from "../components/layout"
-import { Card } from "semantic-ui-react"
+import { Card, Label } from "semantic-ui-react"
 
 const HomePage = ({ data }) => {
-  const posts = data.allMdx.edges
+  const posts = data.allMdx.nodes
 
   return (
     <Layout pageSEO={{ title: "Home" }}>
       <Card.Group centered itemsPerRow="3" stackable>
-        {posts.map(({ node: post }) => (
+        {posts.map(post => (
           <Card key={post.id} as={Link} to={post.fields.slug}>
+            <Label
+              corner
+              icon={post.frontmatter.category.icon}
+              color={post.frontmatter.category.color}
+            />
             <Card.Content
               header={post.frontmatter.title || post.fields.slug}
               meta={post.frontmatter.date}
@@ -33,18 +38,21 @@ export const pageQuery = graphql`
       filter: { fields: { sourceInstanceName: { eq: "blog" } } }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
-      edges {
-        node {
-          id
-          excerpt
-          fields {
-            slug
+      nodes {
+        id
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          category {
+            name
+            icon
+            color
           }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
-          }
+          date(formatString: "MMMM DD, YYYY")
+          description
+          title
         }
       }
     }

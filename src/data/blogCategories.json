@@ -1,0 +1,15 @@
+[
+  {
+    "name": "code",
+    "icon": "code",
+    "color": "yellow"
+  },
+  {
+    "name": "photos",
+    "icon": "image",
+    "color": "orange"
+  },
+  {
+    "name": "writing"
+  }
+]
