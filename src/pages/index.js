@@ -5,8 +5,8 @@ import "../semantic-ui/semantic.less"
 import Layout from "../components/layout"
 import { Card, Label } from "semantic-ui-react"
 
-const HomePage = ({ data }) => {
-  const posts = data.allMdx.nodes
+const HomePage = props => {
+  const posts = props.data.allMdx.nodes
 
   return (
     <Layout pageSEO={{ title: "Home" }}>
@@ -15,8 +15,8 @@ const HomePage = ({ data }) => {
           <Card key={post.id} as={Link} to={post.fields.slug}>
             <Label
               corner
-              icon={post.frontmatter.category.icon}
-              color={post.frontmatter.category.color}
+              icon={post.frontmatter.categoryLinked.icon}
+              color={post.frontmatter.categoryLinked.color}
             />
             <Card.Content
               header={post.frontmatter.title || post.fields.slug}
@@ -45,8 +45,7 @@ export const pageQuery = graphql`
           slug
         }
         frontmatter {
-          category {
-            name
+          categoryLinked {
             icon
             color
           }

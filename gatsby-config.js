@@ -33,7 +33,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`
+        icon: `src/assets/gatsby-icon.png`
       }
     },
     {
@@ -57,13 +57,6 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/assets`,
-        name: `assets`
-      }
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         path: `${__dirname}/content/blog`,
         name: `blog`
       }
@@ -71,7 +64,14 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/data`,
+        path: `${__dirname}/src/assets`,
+        name: `assets`
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/config`,
         name: `data`
       }
     },
@@ -88,7 +88,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
     `gatsby-remark-images`,
-    `gatsby-transformer-json`,
-    `gatsby-transformer-sharp`
+    `gatsby-transformer-sharp`,
+    `gatsby-transformer-yaml`
   ]
 }

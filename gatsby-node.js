@@ -17,7 +17,7 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
           }
           frontmatter {
-            category {
+            categoryLinked {
               name
             }
             title
@@ -26,33 +26,19 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
-  // allBlogCategoriesJson {
-  //   nodes {
-  //     name
-  //   }
-  // }
 
   if (result.errors) {
     throw result.errors
   }
 
   const posts = result.data.allMdx.nodes
-  // const categories = result.data.allBlogCategoriesJson.nodes.map(
-  //   blogCategory => blogCategory.name
-  // )
   posts.forEach((post, index) => {
     const postPrev = index === posts.length - 1 ? null : posts[index + 1]
     const postNext = index === 0 ? null : posts[index - 1]
 
-    // const category = post.frontmatter.category
-    // if (category && !categories.includes(category)) {
-    //   console.error(
-    //     `Frontmatter category for post titled "${post.frontmatter.title}" is not included as a name in allBlogCategoriesJson.`
-    //   )
-    // }
-    if (post.frontmatter.category === null) {
+    if (post.frontmatter.categoryLinked === null) {
       console.error(
-        `Frontmatter category for post titled "${post.frontmatter.title}" is not included as a name in allBlogCategoriesJson.`
+        `Frontmatter category for post titled "${post.frontmatter.title}" is not included as a name in [blog-categories.yaml].`
       )
     }
 
@@ -75,8 +61,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       frontmatter: Frontmatter
     }
     type Frontmatter {
-      title: String!
-      category: BlogCategoriesJson @link(by: "name")
+      category: String
+      categoryLinked: BlogCategoriesYaml @link(by: "name", from: "category")
     }
   `
   createTypes(typeDefs)
