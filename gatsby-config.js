@@ -85,6 +85,7 @@ module.exports = {
     `gatsby-plugin-feed-mdx`,
     `gatsby-plugin-less`,
     `gatsby-plugin-offline`,
+    `gatsby-plugin-postcss`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
     `gatsby-remark-images`,

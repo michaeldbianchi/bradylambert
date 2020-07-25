@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import Layout from "../components/layoutTailwind"
+import Layout from "../components/layout"
 import {
   Button,
   Container,
@@ -12,7 +12,7 @@ import {
   Segment
 } from "semantic-ui-react"
 
-const BlogPostTemplate = props => {
+const BlogPostTemplateCopy = props => {
   const post = props.data.mdx
   const { postPrev, postNext } = props.pageContext
   const postButtonProps = {
@@ -29,7 +29,7 @@ const BlogPostTemplate = props => {
         description: post.frontmatter.description || post.excerpt
       }}
     >
-      <Container text className="prose">
+      <Container text>
         <Header as="h1">
           {post.frontmatter.title}
           <Header.Subheader color="teal">
@@ -66,10 +66,10 @@ const BlogPostTemplate = props => {
   )
 }
 
-export default BlogPostTemplate
+export default BlogPostTemplateCopy
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlugCopy($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
