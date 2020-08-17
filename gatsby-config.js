@@ -10,16 +10,16 @@ module.exports = {
     },
     navLinks: [
       {
-        name: "Home",
-        path: "/"
+        name: 'Home',
+        path: '/'
       },
       {
-        name: "About",
-        path: "/about"
+        name: 'About',
+        path: '/about'
       },
       {
-        name: "Contact",
-        path: "/contact"
+        name: 'Contact',
+        path: '/contact'
       }
     ]
   },
@@ -71,7 +71,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/config`,
+        path: `${__dirname}/src/data`,
         name: `data`
       }
     },
@@ -83,10 +83,12 @@ module.exports = {
       }
     },
     `gatsby-plugin-feed-mdx`,
-    `gatsby-plugin-less`,
     `gatsby-plugin-offline`,
+    `gatsby-plugin-ramda`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-theme-ui`,
+    `gatsby-theme-style-guide`,
     `gatsby-remark-images`,
     `gatsby-transformer-sharp`,
     `gatsby-transformer-yaml`
