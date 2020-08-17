@@ -1,16 +1,13 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-// import "../semantic-ui/semantic.less"
-
-import Layout from "../components/layoutTailwind"
-import { Card, Label } from "semantic-ui-react"
+import React from 'react'
+import { Link, graphql } from 'gatsby'
+import Layout from '../components/layout'
 
 const HomePage = props => {
   const posts = props.data.allMdx.nodes
 
   return (
-    <Layout pageSEO={{ title: "Home" }}>
-      <Card.Group centered itemsPerRow="3" stackable>
+    <Layout pageSEO={{ title: 'Home' }}>
+      {/* <Card.Group centered itemsPerRow="3" stackable>
         {posts.map(post => (
           <Card key={post.id} as={Link} to={post.fields.slug}>
             <Label
@@ -25,7 +22,7 @@ const HomePage = props => {
             />
           </Card>
         ))}
-      </Card.Group>
+      </Card.Group> */}
     </Layout>
   )
 }
