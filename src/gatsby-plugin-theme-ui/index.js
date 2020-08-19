@@ -115,13 +115,30 @@ export const componentVariants = {
     // heading: {}
   },
   links: {
-    ...theme.links
-    // Link
-    // styles: {
-    //   a: {}
-    // },
+    ...theme.links,
     // NavLink
-    // nav: {}
+    nav: {
+      position: 'relative',
+      color: 'white',
+      transition: 'all .25s ease-in-out',
+      '::after': {
+        content: `""`,
+        position: 'absolute',
+        height: '2px',
+        width: 0,
+        left: '50%',
+        bottom: -1,
+        transition: 'all .25s ease-in-out'
+      },
+      '&:hover': {
+        color: 'secondary',
+        '&::after': {
+          width: '100%',
+          left: '0',
+          backgroundColor: 'secondary'
+        }
+      }
+    }
   },
   // Image (no default)
   images: {
@@ -130,16 +147,19 @@ export const componentVariants = {
     // avatar: {}
   },
   cards: {
-    ...theme.cards
+    ...theme.cards,
     // Card
-    // primary: {}
+    primary: {
+      padding: 2,
+      borderRadius: 4,
+      boxShadow: '0 0 8px rgba(0, 0, 0, 0.125)'
+    }
   },
   layout: {
     ...theme.layout,
     // Container
     container: {
       maxWidth: '80ch'
-      // maxWidth: theme.sizes['3xl']
     }
   },
   forms: {
@@ -172,7 +192,9 @@ export const componentVariants = {
   // Message (no default)
   messages: { ...theme.messages },
   styles: {
-    ...theme.styles
+    ...theme.styles,
+    // Link
+    a: { color: 'secondary', textDecoration: 'none' }
     // Progress
     // progress: {},
     // Divider
@@ -180,48 +202,52 @@ export const componentVariants = {
   }
 }
 
-// const scales = {
-//   borders,
-//   borderStyles,
-//   borderWidths,
-//   colors: {
-//     text,
-//     background,
-//     primary,
-//     secondary,
-//     accent,
-//     highlight,
-//     muted,
-//     modes: {}
-//   },
-//   fonts: {
-//     body,
-//     heading,
-//     monospace
-//   },
-//   fontSizes,
-//   fontWeights: {
-//     body,
-//     heading,
-//     bold
-//   },
-//   letterSpacings,
-//   lineHeights: {
-//     body,
-//     heading
-//   },
-//   opacities,
-//   radii,
-//   shadows,
-//   sizes,
-//   space,
-//   zIndices
-// }
+export const scales = {
+  //   borders,
+  //   borderStyles,
+  //   borderWidths,
+  colors: {
+    // text,
+    //     background,
+    primary: theme.colors.teal['3'],
+    secondary: theme.colors.purple['5']
+    //     accent,
+    //     highlight,
+    //     muted,
+    //     modes: {}
+  }
+  //   fonts: {
+  //     body,
+  //     heading,
+  //     monospace
+  //   },
+  //   fontSizes,
+  //   fontWeights: {
+  //     body,
+  //     heading,
+  //     bold
+  //   },
+  //   letterSpacings,
+  //   lineHeights: {
+  //     body,
+  //     heading
+  //   },
+  //   opacities,
+  //   radii,
+  //   shadows,
+  //   sizes,
+  //   space,
+  //   zIndices
+}
 
 export default {
   ...theme,
   breakpoints: breakpoints,
   space: tailwindSpacing,
   sizes: sizes,
+  colors: {
+    ...theme.colors,
+    ...scales.colors
+  },
   ...componentVariants
 }
