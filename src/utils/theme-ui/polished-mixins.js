@@ -7,27 +7,36 @@ const convertToPx = length => convert(length, 'px')
 
 export const between = wrapUtility(
   P.between,
-  ['space', 'space', 'sizes', 'sizes'],
   [
-    undefined,
-    undefined,
-    theme => theme.breakpoints.start,
-    theme => theme.breakpoints.end
+    'space',
+    'space',
+    { sizes: theme => theme.breakpoints.start },
+    { sizes: theme => theme.breakpoints.end }
   ],
   convertToPx
 )
 
+// 'tScale'
+// {tScale: tKey}
+// ['tScale', {tScale: tKey}, [tScale, tKey], ...]
+// export const constrain = wrapUtility(P.between, 'space', convertToPx)
+// export const constrain = wrapUtility(P.between, { space: 4 }, convertToPx)
+// export const constrain = wrapUtility(P.between, ['space', 'space'], convertToPx)
+// export const constrain = wrapUtility(
+//   P.between,
+//   ['space', { space: 1 }, ['sizes', 2], ['sizes']],
+//   convertToPx
+// )
 export const constrain = wrapUtility(
   (fromSize, toSize, minScreen, maxScreen) => {
     const betweenVal = P.between(fromSize, toSize, minScreen, maxScreen)
     return `clamp(${fromSize}, ${betweenVal}, ${toSize})`
   },
-  ['space', 'space', 'sizes', 'sizes'],
   [
-    undefined,
-    undefined,
-    theme => theme.breakpoints.start,
-    theme => theme.breakpoints.end
+    { space: undefined },
+    { space: undefined },
+    { sizes: theme => theme.breakpoints.start },
+    { sizes: theme => theme.breakpoints.end }
   ],
   convertToPx
 )

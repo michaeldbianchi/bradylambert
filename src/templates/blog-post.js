@@ -28,7 +28,7 @@ const BlogPostTemplate = props => {
     width: 5,
     height: 5,
     flex: 'none',
-    color: '#fff'
+    color: 'white'
   }
 
   return (
@@ -69,7 +69,11 @@ const BlogPostTemplate = props => {
             <Button
               as={GatsbyLink}
               to={postNext.fields.slug}
-              sx={{ ...sxButton, flexDirection: 'row-reverse' }}
+              sx={{
+                ...sxButton,
+                ml: postPrev ? 0 : 'auto',
+                flexDirection: 'row-reverse'
+              }}
             >
               <Box as={ArrowRight} sx={{ ...sxIcon }} />
               {postNext.frontmatter.title}

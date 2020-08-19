@@ -22,6 +22,7 @@ const Layout = ({ pageSEO = {}, children }) => {
   const data = useStaticQuery(query)
   const { author, social, navLinks } = data.site.siteMetadata
   const { pathname } = useLocation()
+  const constrainRange = [4, 6]
 
   return (
     <>
@@ -37,8 +38,8 @@ const Layout = ({ pageSEO = {}, children }) => {
         <Flex
           as="header"
           sx={{
-            bg: 'yellow.4',
-            px: constrain(4, 6),
+            bg: 'primary',
+            px: constrain(...constrainRange),
             py: 4,
             gridArea: 'header',
             justifyContent: 'space-between',
@@ -57,25 +58,11 @@ const Layout = ({ pageSEO = {}, children }) => {
                 key={name}
                 as={GatsbyLink}
                 to={path}
-                sx={{
-                  position: 'relative',
-                  '::after': {
-                    content: `""`,
-                    position: 'absolute',
-                    height: '2px',
-                    width: 0,
-                    left: '50%',
-                    bottom: -1,
-                    transition: 'all .25s'
-                  },
-                  '&:hover': {
-                    '&::after': {
-                      width: '100%',
-                      left: '0',
-                      backgroundColor: 'primary'
-                    }
-                  }
-                }}
+                activeStyle={{ color: 'red', backgroundColor: 'yellow' }}
+                partiallyActive={true}
+                sx={{ color: 'black' }}
+                // partiallyActive={path !== '/'}
+                // activeStyle={{theme.buttons.active}}
               >
                 {name}
               </NavLink>
@@ -90,10 +77,25 @@ const Layout = ({ pageSEO = {}, children }) => {
             }}
           />
         </Flex>
-        <Box as="main" gridArea="main" mx={4}>
+        <Box
+          as="main"
+          gridArea="main"
+          sx={{
+            mx: constrain(...constrainRange)
+          }}
+        >
           {children}
         </Box>
-        <Box as="footer" gridArea="footer">
+        <Box
+          as="footer"
+          gridArea="footer"
+          sx={{
+            bg: 'primary',
+            px: constrain(...constrainRange),
+            py: 4,
+            textAlign: 'center'
+          }}
+        >
           {`© ${new Date().getFullYear()} ${author}. Find him on`}
           {` `}
           <Link href={social.github} isExternal>
