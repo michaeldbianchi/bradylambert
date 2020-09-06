@@ -5,31 +5,11 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/layout'
 import { ArrowLeft, ArrowRight } from 'react-feather'
 import { jsx, Box, Button, Container, Flex, Heading, Text } from 'theme-ui'
+import ButtonIcon from '../components/button-icon'
 
 const BlogPostTemplate = props => {
   const post = props.data.mdx
   const { postPrev, postNext } = props.pageContext
-  const sxButton = {
-    flex: 'none',
-    display: 'inline-flex',
-    columnGap: 3,
-    placeItems: 'center',
-    px: 4,
-    py: 3,
-    lineHeight: 1,
-    whiteSpace: 'nowrap',
-    transition: '.3s all',
-    '&:hover': {
-      bg: 'teal.5'
-    }
-  }
-  const sxIcon = {
-    m: -1,
-    width: 5,
-    height: 5,
-    flex: 'none',
-    color: 'white'
-  }
 
   return (
     <Layout
@@ -38,7 +18,7 @@ const BlogPostTemplate = props => {
         description: post.frontmatter.description || post.excerpt
       }}
     >
-      <Container>
+      <Container variant="article">
         <article>
           <header>
             <Heading as="h1">{post.frontmatter.title}</Heading>
@@ -52,32 +32,31 @@ const BlogPostTemplate = props => {
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
-            gap: 4
+            gap: 4,
+            mt: 8
           }}
         >
           {postPrev && (
-            <Button
+            <ButtonIcon
               as={GatsbyLink}
               to={postPrev.fields.slug}
-              sx={{ ...sxButton }}
+              variant="outline"
+              icon={ArrowLeft}
             >
-              <Box as={ArrowLeft} sx={{ ...sxIcon }} />
               {postPrev.frontmatter.title}
-            </Button>
+            </ButtonIcon>
           )}
           {postNext && (
-            <Button
+            <ButtonIcon
               as={GatsbyLink}
               to={postNext.fields.slug}
-              sx={{
-                ...sxButton,
-                ml: postPrev ? 0 : 'auto',
-                flexDirection: 'row-reverse'
-              }}
+              variant="outline"
+              icon={ArrowRight}
+              iconPosition="right"
+              sx={{ ...(!postPrev && { ml: 'auto' }) }}
             >
-              <Box as={ArrowRight} sx={{ ...sxIcon }} />
               {postNext.frontmatter.title}
-            </Button>
+            </ButtonIcon>
           )}
         </Flex>
       </Container>

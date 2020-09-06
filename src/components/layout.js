@@ -2,9 +2,7 @@
 import React from 'react'
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby'
 import GatsbyImage from 'gatsby-image'
-import { useLocation } from '@reach/router'
-import { space } from 'styled-system'
-import { constrain } from '../utils/theme-ui/polished-mixins'
+import { constrain } from '../utils/mixins'
 
 import SEO from '../components/seo'
 import {
@@ -21,7 +19,7 @@ import {
 const Layout = ({ pageSEO = {}, children }) => {
   const data = useStaticQuery(query)
   const { author, social, navLinks } = data.site.siteMetadata
-  const { pathname } = useLocation()
+  const { theme } = useThemeUI()
   const constrainRange = [4, 6]
 
   return (
@@ -38,12 +36,14 @@ const Layout = ({ pageSEO = {}, children }) => {
         <Flex
           as="header"
           sx={{
-            bg: 'primary',
+            bg: 'teal.1',
             px: constrain(...constrainRange),
             py: 4,
             gridArea: 'header',
             justifyContent: 'space-between',
-            columnGap: 4
+            columnGap: 4,
+            borderBottom: '1px solid',
+            borderColor: 'gray.4'
           }}
         >
           <Flex
@@ -58,11 +58,8 @@ const Layout = ({ pageSEO = {}, children }) => {
                 key={name}
                 as={GatsbyLink}
                 to={path}
-                activeStyle={{ color: 'red', backgroundColor: 'yellow' }}
-                partiallyActive={true}
-                sx={{ color: 'black' }}
-                // partiallyActive={path !== '/'}
-                // activeStyle={{theme.buttons.active}}
+                partiallyActive={path !== '/'}
+                activeStyle={theme.buttons.active}
               >
                 {name}
               </NavLink>
@@ -90,10 +87,12 @@ const Layout = ({ pageSEO = {}, children }) => {
           as="footer"
           gridArea="footer"
           sx={{
-            bg: 'primary',
+            bg: 'purple.1',
             px: constrain(...constrainRange),
             py: 4,
-            textAlign: 'center'
+            textAlign: 'center',
+            borderTop: '1px solid',
+            borderColor: 'purple.2'
           }}
         >
           {`© ${new Date().getFullYear()} ${author}. Find him on`}

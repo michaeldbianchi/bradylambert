@@ -1,32 +1,49 @@
+// @jsx jsx
 import React from 'react'
 import { Link as GatsbyLink, graphql } from 'gatsby'
 import Layout from '../components/layout'
 
-import { Card, Heading, Link } from 'theme-ui'
+import { jsx, Card, Container, Grid, Heading, Link, Text } from 'theme-ui'
 
 const HomePage = props => {
   const posts = props.data.allMdx.nodes
 
   return (
     <Layout pageSEO={{ title: 'Home' }}>
-      {/* <Card.Group centered itemsPerRow="3" stackable> */}
-      {posts.map(post => (
-        <Link key={post.id} as={GatsbyLink} to={post.fields.slug}>
-          <Card>
-            {/* <Label
+      <Container>
+        <Grid
+          gap={6}
+          sx={{
+            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gridAutoRows: '1fr',
+            justifyContent: 'center'
+          }}
+        >
+          {posts.map(post => (
+            <Link
+              key={post.id}
+              as={GatsbyLink}
+              to={post.fields.slug}
+              sx={{ textDecoration: 'none' }}
+            >
+              <Card sx={{ height: '100%' }}>
+                {/* <Label
               corner
               icon={post.frontmatter.categoryLinked.icon}
               color={post.frontmatter.categoryLinked.color}
             /> */}
-            {/* <Card.Content */}
-            <Heading>{post.frontmatter.title || post.fields.slug}</Heading>
-            {/* meta={post.frontmatter.date} */}
-            {/* description={post.frontmatter.description || post.excerpt} */}
-            {/* /> */}
-          </Card>
-        </Link>
-      ))}
-      {/* </Card.Group> */}
+                <Heading>{post.frontmatter.title || post.fields.slug}</Heading>
+                <Text variant="default" sx={{ color: 'textMuted' }}>
+                  {post.frontmatter.date}
+                </Text>
+                <Text variant="default" sx={{ mt: 1 }}>
+                  {post.frontmatter.description || post.excerpt}
+                </Text>
+              </Card>
+            </Link>
+          ))}
+        </Grid>
+      </Container>
     </Layout>
   )
 }
