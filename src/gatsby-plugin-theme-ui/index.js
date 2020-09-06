@@ -1,15 +1,10 @@
-import theme from '@theme-ui/preset-tailwind'
+import {
+  colors as tailwindColors,
+  shadows as tailwindShadows
+} from '@theme-ui/preset-tailwind'
+import { polaris as theme } from '@theme-ui/presets'
 
-export const breakpoints = ['480px', '768px', '1024px', '1200px']
-breakpoints.start = '320px'
-breakpoints.end = breakpoints[breakpoints.length - 1]
-breakpoints.mobile = breakpoints[0]
-breakpoints.tablet = breakpoints[1]
-breakpoints.laptop = breakpoints[2]
-breakpoints.desktop = breakpoints[3]
-
-export const tailwindSpacing = {
-  px: '1px',
+export const space = {
   '0': '0',
   '1': '0.25rem',
   '2': '0.5rem',
@@ -40,130 +35,59 @@ export const tailwindSpacing = {
   '288': '72rem'
 }
 
-export const tailwindMaxWidth = {
-  xs: tailwindSpacing['80'],
-  sm: tailwindSpacing['96'],
-  md: tailwindSpacing['112'],
-  lg: tailwindSpacing['128'],
-  xl: tailwindSpacing['144'],
-  '2xl': tailwindSpacing['168'],
-  '3xl': tailwindSpacing['192'],
-  '4xl': tailwindSpacing['224'],
-  '5xl': tailwindSpacing['256'],
-  '6xl': tailwindSpacing['288']
-}
-
-export const tailwindWidth = {
-  '1/2': '50%',
-  '1/3': '33.333333%',
-  '2/3': '66.666667%',
-  '1/4': '25%',
-  '2/4': '50%',
-  '3/4': '75%',
-  '1/5': '20%',
-  '2/5': '40%',
-  '3/5': '60%',
-  '4/5': '80%',
-  '1/6': '16.666667%',
-  '2/6': '33.333333%',
-  '3/6': '50%',
-  '4/6': '66.666667%',
-  '5/6': '83.333333%',
-  '1/12': '8.333333%',
-  '2/12': '16.666667%',
-  '3/12': '25%',
-  '4/12': '33.333333%',
-  '5/12': '41.666667%',
-  '6/12': '50%',
-  '7/12': '58.333333%',
-  '8/12': '66.666667%',
-  '9/12': '75%',
-  '10/12': '83.333333%',
-  '11/12': '91.666667%'
-}
-
 export const sizes = {
-  ...tailwindSpacing,
-  ...tailwindMaxWidth,
-  ...tailwindWidth,
+  ...space,
+  xs: '20rem',
+  sm: '24rem',
+  md: '28rem',
+  lg: '32rem',
+  xl: '36rem',
+  '2xl': '42rem',
+  '3xl': '48rem',
+  '4xl': '56rem',
+  '5xl': '64rem',
+  '6xl': '72rem',
   full: '100%',
   screenH: '100vh',
   screenW: '100vw',
   screenMin: 'vmin',
-  screenMax: 'vmax'
+  screenMax: 'vmax',
+  responsiveStart: '320px',
+  responsiveStop: '1200px',
+  article: '80ch'
 }
+
+export const breakpoints = [
+  sizes.responsiveStart,
+  '768px',
+  sizes.responsiveStop
+]
+breakpoints.start = breakpoints[0]
+breakpoints.stop = breakpoints[breakpoints.length - 1]
 
 export const componentVariants = {
   // Grid (no default)
-  grids: { ...theme.grids },
-  buttons: {
-    ...theme.buttons
-    // Button
-    // primary: {},
-    // Close
-    // close: {},
-    // IconButton
-    // icon: {},
-    // MenuButton
-    // menu: {}
+  grids: {
+    // ...theme.grids
   },
+
   text: {
-    ...theme.text
+    // ...theme.text
     // Text
     // default: {},
     // Heading
     // heading: {}
   },
-  links: {
-    ...theme.links,
-    // NavLink
-    nav: {
-      position: 'relative',
-      color: 'white',
-      transition: 'all .25s ease-in-out',
-      '::after': {
-        content: `""`,
-        position: 'absolute',
-        height: '2px',
-        width: 0,
-        left: '50%',
-        bottom: -1,
-        transition: 'all .25s ease-in-out'
-      },
-      '&:hover': {
-        color: 'secondary',
-        '&::after': {
-          width: '100%',
-          left: '0',
-          backgroundColor: 'secondary'
-        }
-      }
-    }
-  },
+
   // Image (no default)
   images: {
-    ...theme.images
+    // ...theme.images
     // Avatar
     // avatar: {}
   },
-  cards: {
-    ...theme.cards,
-    // Card
-    primary: {
-      padding: 2,
-      borderRadius: 4,
-      boxShadow: '0 0 8px rgba(0, 0, 0, 0.125)'
-    }
-  },
-  layout: {
-    ...theme.layout,
-    // Container
-    container: {
-      maxWidth: '80ch'
-    }
-  },
+
   forms: {
-    ...theme.forms
+    // ...theme.forms
     // Label
     // label: {},
     // Input
@@ -181,73 +105,187 @@ export const componentVariants = {
   },
   // Badge
   badges: {
-    ...theme.badges
+    // ...theme.badges
     // primary: {}
   },
   // Alert
   alerts: {
-    ...theme.alerts
+    // ...theme.alerts
     // primary: {}
   },
   // Message (no default)
-  messages: { ...theme.messages },
+  messages: {
+    // ...theme.messages
+  }
+}
+
+// export const scales = {
+//   borders,
+//   borderStyles,
+//   borderWidths,
+//   colors: {
+//     text,
+//     background,
+//     primary,
+//     secondary,
+//     accent,
+//     highlight,
+//     muted,
+//     modes: {}
+//   }
+//   fonts: {
+//     body,
+//     heading,
+//     monospace
+//   },
+//   fontSizes,
+//   fontWeights: {
+//     body,
+//     heading,
+//     bold
+//   },
+//   letterSpacings,
+//   lineHeights: {
+//     body,
+//     heading
+//   },
+//   opacities,
+//   radii,
+//   shadows,
+//   sizes,
+//   space,
+//   zIndices
+// }
+
+const sxButtons = {
+  cursor: 'pointer',
+  placeItems: 'center',
+  px: 4,
+  py: 3,
+  lineHeight: 1,
+  whiteSpace: 'nowrap',
+  transition: '.3s all',
+  '&:hover': {
+    bg: 'teal.6'
+  }
+}
+
+export default {
+  ...theme,
+  shadows: {
+    ...tailwindShadows
+  },
+  breakpoints: breakpoints,
+  space: {
+    ...space
+  },
+  sizes: {
+    ...sizes
+  },
+  // TODO: hover w/ saturate or darken
+  colors: {
+    ...tailwindColors,
+    primary: tailwindColors.teal['5'],
+    secondary: tailwindColors.purple['7']
+    // primaryHover: ,
+    // secondaryHover:
+  },
+  buttons: {
+    // Button
+    primary: {
+      ...sxButtons
+    },
+    outline: {
+      ...sxButtons,
+      bg: 'background',
+      border: '1px solid',
+      borderColor: 'primary',
+      color: 'primary',
+      '&:hover': {
+        bg: 'teal.1'
+      }
+    }
+    // Close
+    // close: {},
+    // IconButton
+    // icon: {},
+    // MenuButton
+    // menu: {}
+  },
+  links: {
+    // NavLink
+    nav: {
+      ...theme.styles.h4,
+      position: 'relative',
+      color: 'secondary',
+      transition: 'all .25s ease-in-out',
+      '::after': {
+        content: `""`,
+        position: 'absolute',
+        height: '2px',
+        width: 0,
+        left: '50%',
+        bottom: -2,
+        transition: 'all .25s ease-in-out'
+      },
+      '&:hover': {
+        color: 'secondary',
+        '&::after': {
+          width: '100%',
+          left: '0',
+          backgroundColor: 'secondary'
+        }
+      }
+    }
+  },
+  cards: {
+    // Card
+    primary: {
+      px: 6,
+      py: 4,
+      borderRadius: 4,
+      border: '2px solid',
+      borderColor: 'purple.2',
+      boxShadow: 'md',
+      transition: 'all .2s ease-in-out',
+      '&:hover': {
+        transform: 'translateY(-3px)'
+      }
+    }
+  },
+  text: {
+    // Text
+    default: {
+      color: 'text',
+      fontFamily: 'body',
+      fontWeight: 'body',
+      lineHeight: 'body'
+    },
+    heading: {
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      lineHeight: 'heading'
+    }
+  },
+  layout: {
+    // Container
+    container: {
+      maxWidth: 'responsiveStop'
+    },
+    article: {
+      maxWidth: 'article'
+    }
+  },
   styles: {
     ...theme.styles,
     // Link
-    a: { color: 'secondary', textDecoration: 'none' }
+    a: {
+      color: 'secondary'
+      // textDecoration: 'none'
+    }
     // Progress
     // progress: {},
     // Divider
     // hr: {}
   }
-}
-
-export const scales = {
-  //   borders,
-  //   borderStyles,
-  //   borderWidths,
-  colors: {
-    // text,
-    //     background,
-    primary: theme.colors.teal['3'],
-    secondary: theme.colors.purple['5']
-    //     accent,
-    //     highlight,
-    //     muted,
-    //     modes: {}
-  }
-  //   fonts: {
-  //     body,
-  //     heading,
-  //     monospace
-  //   },
-  //   fontSizes,
-  //   fontWeights: {
-  //     body,
-  //     heading,
-  //     bold
-  //   },
-  //   letterSpacings,
-  //   lineHeights: {
-  //     body,
-  //     heading
-  //   },
-  //   opacities,
-  //   radii,
-  //   shadows,
-  //   sizes,
-  //   space,
-  //   zIndices
-}
-
-export default {
-  ...theme,
-  breakpoints: breakpoints,
-  space: tailwindSpacing,
-  sizes: sizes,
-  colors: {
-    ...theme.colors,
-    ...scales.colors
-  },
-  ...componentVariants
 }
