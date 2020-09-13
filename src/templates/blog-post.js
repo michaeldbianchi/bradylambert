@@ -1,10 +1,10 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link as GatsbyLink, graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/layout'
 import { ArrowLeft, ArrowRight } from 'react-feather'
-// @jsx jsx
-import { jsx, Box, Container, Divider, Flex, Heading, Text } from 'theme-ui'
+import { Box, Container, Divider, Flex, Heading, Text } from 'theme-ui'
 import ButtonIcon from '../components/button-icon'
 
 function BlogPostTemplate({ data, pageContext }) {

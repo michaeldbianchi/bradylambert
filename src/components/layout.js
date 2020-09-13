@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby'
 import GatsbyImage from 'gatsby-image'
 import { constrain } from '../utils/mixins'
-// @jsx jsx
-import { jsx, Box, Flex, Grid, Link, NavLink, useThemeUI } from 'theme-ui'
+import { Box, Flex, Grid, Link, NavLink, useThemeUI } from 'theme-ui'
 import SEO from '../components/seo'
 
 function Layout({ pageSEO = {}, children }) {
