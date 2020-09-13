@@ -70,9 +70,9 @@ exports.createSchemaCustomization = ({ actions }) => {
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
-  const name = "blog"
+  const name = 'blog'
   if (
-    node.internal.type === "Mdx" &&
+    node.internal.type === 'Mdx' &&
     node.parent !== null &&
     getNode(node.parent).sourceInstanceName === name
   ) {
@@ -83,12 +83,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     })
     createNodeField({
       node,
-      name: "slug",
+      name: 'slug',
       value: `/${name}${relativePath}`
     })
     createNodeField({
       node,
-      name: "sourceInstanceName",
+      name: 'sourceInstanceName',
       value: name
     })
   }

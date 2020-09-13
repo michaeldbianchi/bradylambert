@@ -1,32 +1,23 @@
-// @jsx jsx
 import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby'
 import GatsbyImage from 'gatsby-image'
 import { constrain } from '../utils/mixins'
-
+// @jsx jsx
+import { jsx, Box, Flex, Grid, Link, NavLink, useThemeUI } from 'theme-ui'
 import SEO from '../components/seo'
-import {
-  jsx,
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Link,
-  NavLink,
-  useThemeUI
-} from 'theme-ui'
 
-const Layout = ({ pageSEO = {}, children }) => {
+function Layout({ pageSEO = {}, children }) {
   const data = useStaticQuery(query)
   const { author, social, navLinks } = data.site.siteMetadata
   const { theme } = useThemeUI()
   const constrainRange = [4, 6]
 
   return (
-    <>
+    <React.Fragment>
       <SEO {...pageSEO} />
       <Grid
-        gap={8}
+        gap={10}
         sx={{
           minHeight: '100vh',
           gridTemplateAreas: "'header' 'main' 'footer'",
@@ -36,14 +27,14 @@ const Layout = ({ pageSEO = {}, children }) => {
         <Flex
           as="header"
           sx={{
-            bg: 'teal.1',
+            bg: 'teal.5',
             px: constrain(...constrainRange),
             py: 4,
             gridArea: 'header',
             justifyContent: 'space-between',
             columnGap: 4,
             borderBottom: '1px solid',
-            borderColor: 'gray.4'
+            borderColor: 'teal.7'
           }}
         >
           <Flex
@@ -87,12 +78,12 @@ const Layout = ({ pageSEO = {}, children }) => {
           as="footer"
           gridArea="footer"
           sx={{
-            bg: 'purple.1',
+            bg: 'teal.1',
             px: constrain(...constrainRange),
             py: 4,
             textAlign: 'center',
             borderTop: '1px solid',
-            borderColor: 'purple.2'
+            borderColor: 'teal.2'
           }}
         >
           {`© ${new Date().getFullYear()} ${author}. Find him on`}
@@ -103,8 +94,13 @@ const Layout = ({ pageSEO = {}, children }) => {
           {`!`}
         </Box>
       </Grid>
-    </>
+    </React.Fragment>
   )
+}
+
+Layout.propTypes = {
+  pageSEO: PropTypes.object,
+  children: PropTypes.node
 }
 
 export default Layout
