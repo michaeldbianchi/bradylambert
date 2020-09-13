@@ -1,15 +1,15 @@
-// @jsx jsx
-import React from 'react'
+import PropTypes from 'prop-types'
 import { Link as GatsbyLink, graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/layout'
 import { ArrowLeft, ArrowRight } from 'react-feather'
-import { jsx, Box, Button, Container, Flex, Heading, Text } from 'theme-ui'
+// @jsx jsx
+import { jsx, Box, Container, Divider, Flex, Heading, Text } from 'theme-ui'
 import ButtonIcon from '../components/button-icon'
 
-const BlogPostTemplate = props => {
-  const post = props.data.mdx
-  const { postPrev, postNext } = props.pageContext
+function BlogPostTemplate({ data, pageContext }) {
+  const post = data.mdx
+  const { postPrev, postNext } = pageContext
 
   return (
     <Layout
@@ -18,22 +18,29 @@ const BlogPostTemplate = props => {
         description: post.frontmatter.description || post.excerpt
       }}
     >
-      <Container variant="article">
-        <article>
-          <header>
+      <Container
+        variant="article"
+        sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+      >
+        <Box as="article" sx={{ mb: 'auto' }}>
+          <Box as="header">
             <Heading as="h1">{post.frontmatter.title}</Heading>
             <Text sx={{ fontSize: 16 }}>{post.frontmatter.date}</Text>
-          </header>
+          </Box>
           <Box as={MDXRenderer}>{post.body}</Box>
-        </article>
+        </Box>
+        <Divider
+          sx={{
+            my: 6
+          }}
+        />
         <Flex
           as="nav"
           sx={{
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
-            gap: 4,
-            mt: 8
+            gap: 4
           }}
         >
           {postPrev && (
@@ -62,6 +69,11 @@ const BlogPostTemplate = props => {
       </Container>
     </Layout>
   )
+}
+
+BlogPostTemplate.propTypes = {
+  data: PropTypes.object,
+  pageContext: PropTypes.object
 }
 
 export default BlogPostTemplate

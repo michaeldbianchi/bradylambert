@@ -2,7 +2,7 @@ import {
   colors as tailwindColors,
   shadows as tailwindShadows
 } from '@theme-ui/preset-tailwind'
-import { polaris as theme } from '@theme-ui/presets'
+import { polaris } from '@theme-ui/presets'
 
 export const space = {
   '0': '0',
@@ -159,9 +159,11 @@ export const componentVariants = {
 
 const sxButtons = {
   cursor: 'pointer',
+  display: 'inline-flex',
   placeItems: 'center',
   px: 4,
   py: 3,
+  fontWeight: 500,
   lineHeight: 1,
   whiteSpace: 'nowrap',
   transition: '.3s all',
@@ -171,7 +173,12 @@ const sxButtons = {
 }
 
 export default {
-  ...theme,
+  ...polaris,
+  fonts: {
+    body: '"Avenir Next", Helvetica, Arial, sans-serif',
+    heading: '"Raleway", sans-serif',
+    monospace: 'Menlo, monospace'
+  },
   shadows: {
     ...tailwindShadows
   },
@@ -205,6 +212,10 @@ export default {
         bg: 'teal.1'
       }
     }
+    // outlineMd: {
+    // fontWeight: 600
+    // borderWidths: '2px'
+    // }
     // Close
     // close: {},
     // IconButton
@@ -215,9 +226,9 @@ export default {
   links: {
     // NavLink
     nav: {
-      ...theme.styles.h4,
+      fontWeight: 500,
       position: 'relative',
-      color: 'secondary',
+      color: 'white',
       transition: 'all .25s ease-in-out',
       '::after': {
         content: `""`,
@@ -225,7 +236,7 @@ export default {
         height: '2px',
         width: 0,
         left: '50%',
-        bottom: -2,
+        bottom: -1,
         transition: 'all .25s ease-in-out'
       },
       '&:hover': {
@@ -277,15 +288,16 @@ export default {
     }
   },
   styles: {
-    ...theme.styles,
+    ...polaris.styles,
     // Link
     a: {
       color: 'secondary'
-      // textDecoration: 'none'
-    }
+    },
     // Progress
     // progress: {},
     // Divider
-    // hr: {}
+    hr: {
+      color: 'gray.5'
+    }
   }
 }

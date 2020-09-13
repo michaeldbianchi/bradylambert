@@ -1,12 +1,11 @@
-// @jsx jsx
-import React from 'react'
+import PropTypes from 'prop-types'
 import { Link as GatsbyLink, graphql } from 'gatsby'
+// @jsx jsx
+import { jsx, Card, Container, Grid, Heading, Link, Text } from 'theme-ui'
 import Layout from '../components/layout'
 
-import { jsx, Card, Container, Grid, Heading, Link, Text } from 'theme-ui'
-
-const HomePage = props => {
-  const posts = props.data.allMdx.nodes
+function HomePage({ data }) {
+  const posts = data.allMdx.nodes
 
   return (
     <Layout pageSEO={{ title: 'Home' }}>
@@ -14,7 +13,7 @@ const HomePage = props => {
         <Grid
           gap={6}
           sx={{
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
             gridAutoRows: '1fr',
             justifyContent: 'center'
           }}
@@ -46,6 +45,10 @@ const HomePage = props => {
       </Container>
     </Layout>
   )
+}
+
+HomePage.propTypes = {
+  data: PropTypes.object
 }
 
 export default HomePage

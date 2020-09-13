@@ -1,13 +1,10 @@
-// @jsx jsx
 import React from 'react'
 import PropTypes from 'prop-types'
+// @jsx jsx
 import { jsx, Box, Button } from 'theme-ui'
 
-const ButtonIcon = React.forwardRef((props, ref) => {
-  const { icon, iconPosition, ...rest } = props
-
+const ButtonIcon = React.forwardRef(({ icon, iconPosition, ...rest }, ref) => {
   const sxButton = {
-    display: 'inline-flex',
     columnGap: 3,
     ...(iconPosition === 'right' && { flexDirection: 'row-reverse' })
   }

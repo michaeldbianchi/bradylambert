@@ -7,6 +7,7 @@
   "author": "Brady Lambert <lambertbrady14@gmail.com> (https://www.bradylambert.com/)",
   "repository": "github:lambertbrady/bradylambert",
   "dependencies": {
+    "@loadable/component": "^5.13.1",
     "@mdx-js/mdx": "^1.6.16",
     "@mdx-js/react": "^1.6.16",
     "@theme-ui/color": "^0.3.1",
@@ -31,6 +32,7 @@
     "gatsby-theme-style-guide": "^0.3.1",
     "gatsby-transformer-sharp": "^2.5.14",
     "gatsby-transformer-yaml": "^2.4.10",
+    "p5": "^1.1.9",
     "polished": "^3.6.6",
     "prismjs": "^1.21.0",
     "prop-types": "^15.7.2",
@@ -44,7 +46,11 @@
   "devDependencies": {
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-graphql": "^4.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-mdx": "^1.8.2",
     "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
     "gh-pages": "^2.2.0",
     "prettier": "^1.19.1",
     "stylelint": "^13.7.0",
