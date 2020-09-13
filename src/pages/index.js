@@ -1,7 +1,7 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link as GatsbyLink, graphql } from 'gatsby'
-// @jsx jsx
-import { jsx, Card, Container, Grid, Heading, Link, Text } from 'theme-ui'
+import { Card, Container, Grid, Heading, Link, Text } from 'theme-ui'
 import Layout from '../components/layout'
 
 function HomePage({ data }) {

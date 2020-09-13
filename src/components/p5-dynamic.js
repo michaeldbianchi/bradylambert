@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { Box } from 'theme-ui'
 
-function P5Dynamic({ sketch, sketchStyles, style, ...rest }) {
+function P5Dynamic({ sketch, sketchStyles, sx, ...rest }) {
   const canvasParentRef = useRef(null)
-  const canvasParentStyles = Object.assign({ margin: '1.5rem 0' }, style)
+  const sxParentDefault = { my: 6 }
 
   const setCanvasStyles = (canvas, styles = {}) => {
     // default styles
@@ -28,13 +29,15 @@ function P5Dynamic({ sketch, sketchStyles, style, ...rest }) {
     }
   }, [sketch, sketchStyles])
 
-  return <div ref={canvasParentRef} style={canvasParentStyles} {...rest} />
+  return (
+    <Box ref={canvasParentRef} sx={{ ...sxParentDefault, ...sx }} {...rest} />
+  )
 }
 
 P5Dynamic.propTypes = {
   sketch: PropTypes.func.isRequired,
   sketchStyles: PropTypes.object,
-  style: PropTypes.object
+  sx: PropTypes.object
 }
 
 export default P5Dynamic
