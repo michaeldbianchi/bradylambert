@@ -4,14 +4,13 @@ import { Box } from 'theme-ui'
 
 function P5Dynamic({ sketch, sketchStyles, sx, ...rest }) {
   const canvasParentRef = useRef(null)
-  const sxParentDefault = { my: 6 }
-
+  const canvasParentSx = { my: 6, ...sx }
   const setCanvasStyles = (canvas, styles = {}) => {
-    // default styles
+    // default canvas styles
     canvas.style['display'] = 'block'
     canvas.style['width'] = '100%'
     canvas.style['height'] = '100%'
-    // additional styles
+    // merge with user-defined canvas styles
     Object.assign(canvas.style, styles)
   }
 
@@ -29,9 +28,7 @@ function P5Dynamic({ sketch, sketchStyles, sx, ...rest }) {
     }
   }, [sketch, sketchStyles])
 
-  return (
-    <Box ref={canvasParentRef} sx={{ ...sxParentDefault, ...sx }} {...rest} />
-  )
+  return <Box ref={canvasParentRef} sx={canvasParentSx} {...rest} />
 }
 
 P5Dynamic.propTypes = {

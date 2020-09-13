@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Box, Button } from 'theme-ui'
 
 const ButtonIcon = React.forwardRef(
-  ({ icon, iconPosition = 'left', ...rest }, ref) => {
+  ({ icon, iconPosition = 'left', sx, ...rest }, ref) => {
     const sxButton = {
       columnGap: 3,
       ...(iconPosition === 'right' && { flexDirection: 'row-reverse' })
@@ -16,7 +16,7 @@ const ButtonIcon = React.forwardRef(
     }
 
     return (
-      <Button ref={ref} {...rest} sx={{ ...sxButton }}>
+      <Button ref={ref} {...rest} sx={{ ...sxButton, ...sx }}>
         <Box as={icon} sx={{ ...sxIcon }} />
         {rest.children}
       </Button>
@@ -28,7 +28,8 @@ ButtonIcon.displayName = 'ButtonIcon'
 
 ButtonIcon.propTypes = {
   icon: PropTypes.elementType.isRequired,
-  iconPosition: PropTypes.oneOf(['left', 'right'])
+  iconPosition: PropTypes.oneOf(['left', 'right']),
+  sx: PropTypes.object
 }
 
 export default ButtonIcon
