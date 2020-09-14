@@ -63,6 +63,6 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "deploy": "gatsby build && gh-pages -d public"
+    "deploy": "npm install && gatsby build && gh-pages -d public"
   }
 }
